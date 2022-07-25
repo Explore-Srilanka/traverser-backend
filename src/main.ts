@@ -24,10 +24,7 @@ async function bootstrap() {
 
   app.enableCors();
 
-  app.enableVersioning({
-    defaultVersion: '1',
-    type: VersioningType.URI,
-  });
+  app.setGlobalPrefix('api/v1');
 
   const port = process.env.PORT || 3000;
 

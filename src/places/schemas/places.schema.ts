@@ -15,7 +15,7 @@ export class Places extends Document {
   @Prop({ required: true })
   description: string;
 
-  @Prop()
+  @Prop({ required: true })
   image: string;
 
   @Prop({ type: [Types.ObjectId], ref: 'Category' })

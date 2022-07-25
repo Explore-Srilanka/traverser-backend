@@ -10,7 +10,10 @@ import {
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: Categories.name, schema: CategoriesSchema },
+      { 
+        name: Categories.name, 
+        schema: CategoriesSchema 
+      },
     ]),
   ],
   providers: [CategoriesService],
