@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import helmet from 'helmet';
 import * as morgan from 'morgan'
-import {ValidationPipe } from '@nestjs/common'
+import {ValidationPipe, VersioningType } from '@nestjs/common'
 
 async function bootstrap() {
 
@@ -22,6 +22,11 @@ async function bootstrap() {
   app.use(morgan('dev'));
 
   app.enableCors();
+  
+  app.enableVersioning({
+    defaultVersion: '1',
+    type: VersioningType.URI
+  });
   
   const port = process.env.PORT || 3000;
 
