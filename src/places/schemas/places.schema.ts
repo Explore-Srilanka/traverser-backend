@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true , versionKey : false})
 export class Places extends Document {
   @Prop({ unique: true, required: true })
   name: string;
@@ -18,7 +18,7 @@ export class Places extends Document {
   @Prop({ required: true })
   image: string;
 
-  @Prop({ type: [Types.ObjectId], ref: 'Category' })
+  @Prop({ type: Types.ObjectId, ref: 'Category' })
   category_id: string;
 }
 

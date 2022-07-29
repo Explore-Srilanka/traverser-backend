@@ -1,6 +1,6 @@
-import { Controller } from '@nestjs/common';
+import { Controller , Get, Res, HttpStatus, Param} from '@nestjs/common';
 import { CategoriesService } from '@/categories/services/categories.service';
-import { Get, Res, HttpStatus, Param } from '@nestjs/common';
+
 
 @Controller('categories')
 export class CategoriesController {
@@ -8,7 +8,7 @@ export class CategoriesController {
 
   @Get()
   public async getAll(@Res() response) {
-    const categories = await this.categoriesService.findAll();
+    const categories = await this.categoriesService.findAll({});
     return response.status(HttpStatus.OK).json(categories);
   }
 

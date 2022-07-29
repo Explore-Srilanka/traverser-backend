@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreatePlaceDto } from '@/places/dtos/create-place.dto';
 import { UpdatePlaceDto } from '@/places/dtos/update-place.dto';
 import { Places } from '@/places/schemas/places.schema';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 
 @Injectable()
 export class PlacesService {
@@ -13,12 +13,16 @@ export class PlacesService {
         private readonly placesModel: Model<Places>,
     ) {}
 
-    public async findAll() {
-        return await this.placesModel.find({});
+    public async findAll(query: object) {
+        return await this.placesModel.find(query);
       }
     
       public async findById(id: string) {
         return await this.placesModel.findById(id);
+      }
+
+      public async findByParameter(query: object){
+        return await this.placesModel.findOne(query);
       }
     
       public async create(createPlaceDto: CreatePlaceDto) {
@@ -34,8 +38,12 @@ export class PlacesService {
         return place;
       }
     
-      public async delete(id: string) {
+      public async deleteOne(id: string) {
         const place = await this.placesModel.findByIdAndRemove(id);
         return place;
+      }
+
+      public async deleteAll(){
+        return  await this.placesModel.deleteMany();
       }
 }
