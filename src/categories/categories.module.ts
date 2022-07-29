@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CommandModule } from 'nestjs-command';
+import { CategoriesSeed } from '@/categories/seeds/categories.seed';
 import { CategoriesService } from '@/categories/services/categories.service';
 import { CategoriesController } from '@/categories/controllers/categories.controller';
-import { MongooseModule } from '@nestjs/mongoose';
 import {
   CategoriesSchema,
   Categories,
@@ -15,8 +17,17 @@ import {
         schema: CategoriesSchema 
       },
     ]),
+    CommandModule
   ],
-  providers: [CategoriesService],
-  controllers: [CategoriesController],
+  providers: [
+    CategoriesSeed, 
+    CategoriesService
+  ],
+  controllers: [
+    CategoriesController
+  ],
+  exports: [
+    CategoriesService
+  ]
 })
 export class CategoriesModule {}

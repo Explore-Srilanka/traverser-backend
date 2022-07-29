@@ -12,12 +12,16 @@ export class CategoriesService {
     private readonly categoriesModel: Model<Categories>,
   ) {}
 
-  public async findAll() {
-    return await this.categoriesModel.find({});
+  public async findAll(query: object) {
+    return await this.categoriesModel.find(query);
   }
 
   public async findById(id: string) {
     return await this.categoriesModel.findById(id);
+  }
+
+  public async findByParameter(query: object){
+    return await this.categoriesModel.findOne(query);
   }
 
   public async create(createCategoryDto: CreateCategoryDto) {
@@ -33,8 +37,12 @@ export class CategoriesService {
     return category;
   }
 
-  public async delete(id: string) {
+  public async deleteOne(id: string) {
     const category = await this.categoriesModel.findByIdAndRemove(id);
     return category;
+  }
+
+  public async deleteAll(){
+     return  await this.categoriesModel.deleteMany();
   }
 }
