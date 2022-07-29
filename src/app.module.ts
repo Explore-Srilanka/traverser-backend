@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import configuration from '@/config/configuration';
 import { BullModule } from '@nestjs/bull';
 import { MongooseModule } from '@nestjs/mongoose';
+import configuration from '@/config/configuration';
 import { CategoriesModule } from '@/categories/categories.module';
 import { PlacesModule } from '@/places/places.module';
+import { ReviewsModule } from '@/reviews/reviews.module';
+import { UtilModule } from '@/util/util.module';
 
 @Module({
   imports: [
@@ -32,6 +34,12 @@ import { PlacesModule } from '@/places/places.module';
     }),
     CategoriesModule,
     PlacesModule,
+    ReviewsModule,
+    UtilModule,
+  ],
+  providers: [
+
   ],
 })
+
 export class AppModule {}

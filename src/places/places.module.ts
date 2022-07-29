@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CommandModule } from 'nestjs-command';
 import { PlacesController } from '@/places/controllers/places.controller';
 import { PlacesService } from '@/places/services/places.service';
-import { MongooseModule } from '@nestjs/mongoose';
+import { CategoriesModule } from '@/categories/categories.module';
+import { PlacesSeed } from '@/places/seeds/places.seed';
 import {
   PlacesSchema,
   Places,
@@ -15,8 +18,10 @@ import {
         schema: PlacesSchema 
       },
     ]),
+    CategoriesModule,
+    CommandModule
   ],
   controllers: [PlacesController],
-  providers: [PlacesService]
+  providers: [PlacesSeed, PlacesService]
 })
 export class PlacesModule {}
