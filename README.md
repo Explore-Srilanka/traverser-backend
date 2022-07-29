@@ -41,8 +41,8 @@ $ npm run test:cov
 
 ## Deployment Stages 
 
-1. develop  (dev): `automated deployment to dev environment`
-2. production  (master): `automated deployment to production environmen`
+1. develop (dev): `automated deployment to dev environment`
+2. production (master): `automated deployment to production environment`
 
 ## <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
