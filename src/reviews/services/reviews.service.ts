@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateReviewDto } from '@/reviews/dtos/create-review.dto';
 import { UpdateReviewDto } from '@/reviews/dtos/update-review.dto';
+import { PaginationDto } from '@/reviews/dtos/pagination.dto';
 import { Reviews } from '@/reviews/schemas/reviews.schema';
 
 @Injectable()
@@ -13,8 +14,8 @@ export class ReviewsService {
         private readonly reviewsModel: Model<Reviews>,
     ) {}
 
-    public async findAll() {
-        return await this.reviewsModel.find({});
+    public async findAll(query) {
+        return await this.reviewsModel.find(query);
       }
     
     public async findById(id: string) {

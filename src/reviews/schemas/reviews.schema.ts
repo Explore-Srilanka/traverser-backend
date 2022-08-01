@@ -19,7 +19,7 @@ export class Reviews extends Document {
   @Prop({ required: true , default: 'active', enum: ['active','disabled']})
   status : string;
 
-  @Prop({ type: [Types.ObjectId], ref: 'Places' })
+  @Prop({ type: Types.ObjectId, ref: 'Places' })
   place_id: string;
 }
 
