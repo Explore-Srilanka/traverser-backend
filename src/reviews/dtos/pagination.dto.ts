@@ -1,4 +1,4 @@
-import { IsOptional, IsPositive } from 'class-validator';
+import { IsOptional, IsPositive, IsObject } from 'class-validator';
 
 export class PaginationDto {
   @IsOptional()
@@ -8,4 +8,9 @@ export class PaginationDto {
   @IsOptional()
   @IsPositive()
   offset: number;
+
+  
+  @IsOptional()
+  @IsObject()
+  search: object;
 }

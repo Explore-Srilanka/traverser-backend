@@ -14,8 +14,9 @@ export class ReviewsService {
         private readonly reviewsModel: Model<Reviews>,
     ) {}
 
-    public async findAll(query) {
-        return await this.reviewsModel.find(query);
+    public async findAll(paginationDto : PaginationDto) {
+        const { limit, offset, search} = paginationDto;
+        return await this.reviewsModel.find(search).skip(offset).limit(limit).exec();
       }
     
     public async findById(id: string) {

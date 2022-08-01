@@ -1,6 +1,7 @@
-import { Body, Controller, HttpStatus, Post, Res , Logger, Get, Param, Delete} from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res , Logger, Get, Param, Delete, Query} from '@nestjs/common';
 import {Response} from 'express';
 import { CreateReviewDto } from '@/reviews/dtos/create-review.dto';
+import { PaginationDto } from '@/reviews/dtos/pagination.dto';
 import { ReviewsService } from '@/reviews/services/reviews.service';
 import { ResponseTypes } from '@/shared/enums/responseTypes.enum';
 
@@ -33,9 +34,10 @@ export class ReviewsController {
 	}
 
     @Get('/places/:id')
-    public async getById(@Res() response: Response, @Param('id') id: string) {
+    public async getById(@Res() response: Response, @Query() paginationDto: PaginationDto, @Param('id') id: string) {
       try {
-        const reviews = await this.reviewsService.findAll({'place_id' : id});
+        paginationDto.search = {'place_id' : id};
+        const reviews = await this.reviewsService.findAll(paginationDto);
         return response.status(HttpStatus.OK).json({
             type    :  ResponseTypes.SUCCESS, 
             message : 'Reviews has been fetched successfully',
