@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module} from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { BullModule } from '@nestjs/bull';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -38,7 +38,7 @@ import { UtilModule } from '@/util/util.module';
     UtilModule,
   ],
   providers: [
-
+   
   ],
 })
 
