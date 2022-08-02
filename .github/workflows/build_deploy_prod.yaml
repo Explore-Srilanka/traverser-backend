@@ -24,7 +24,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-  # deploy: ## <-- this is the new stuff
+  # deploy: 
   #   needs: build
   #   runs-on: ubuntu-latest
   #   steps:
@@ -32,6 +32,6 @@ jobs:
   #     - uses: akhileshns/heroku-deploy@v3.12.12
   #       with:
   #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-  #         heroku_app_name: "github-action-demo-test"
-  #         heroku_email: "pandhuw58@gmail.com"
+  #         heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+  #         heroku_email: ${{secrets.HEROKU_APP_EMAIL}}
   #         remote_branch: master
