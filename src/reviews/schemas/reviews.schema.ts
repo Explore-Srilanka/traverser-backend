@@ -1,9 +1,8 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types} from 'mongoose';
+import { Document, Types } from 'mongoose';
 
-@Schema({ timestamps: true , versionKey : false})
+@Schema({ timestamps: true, versionKey: false })
 export class Reviews extends Document {
-
   @Prop({ required: true })
   name: string;
 
@@ -14,10 +13,10 @@ export class Reviews extends Document {
   description: string;
 
   @Prop({ required: true })
-  rating: number ;
+  rating: number;
 
-  @Prop({ required: true , default: 'active', enum: ['active','disabled']})
-  status : string;
+  @Prop({ required: true, default: 'active', enum: ['active', 'disabled'] })
+  status: string;
 
   @Prop({ type: Types.ObjectId, ref: 'Places' })
   place_id: string;
