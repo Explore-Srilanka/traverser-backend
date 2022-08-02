@@ -20,7 +20,7 @@ export class CategoriesService {
     return await this.categoriesModel.findById(id);
   }
 
-  public async findByParameter(query: object){
+  public async findByParameter(query: object) {
     return await this.categoriesModel.findOne(query);
   }
 
@@ -42,7 +42,7 @@ export class CategoriesService {
     return category;
   }
 
-  public async deleteAll(){
-     return  await this.categoriesModel.deleteMany();
+  public async deleteAll() {
+    return await this.categoriesModel.deleteMany();
   }
 }

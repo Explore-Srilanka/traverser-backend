@@ -16,14 +16,14 @@ export default () => ({
   filesystem: {
     default: 's3',
     disks: {
-        s3: {
-            driver: 's3',
-            bucket: process.env.AWS_S3_BUCKET,
-            key: process.env.AWS_STANDARD_KEY_ID,
-            secret: process.env.AWS_STANDARD_KEY_SECRET,
-            region: process.env.AWS_DEFAULT_REGION,
-        }
-    }
+      s3: {
+        driver: 's3',
+        bucket: process.env.AWS_S3_BUCKET,
+        key: process.env.AWS_STANDARD_KEY_ID,
+        secret: process.env.AWS_STANDARD_KEY_SECRET,
+        region: process.env.AWS_DEFAULT_REGION,
+      },
+    },
   },
   queue: {
     redis: {

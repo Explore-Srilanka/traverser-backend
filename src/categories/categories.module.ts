@@ -12,22 +12,15 @@ import {
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { 
-        name: Categories.name, 
-        schema: CategoriesSchema 
+      {
+        name: Categories.name,
+        schema: CategoriesSchema,
       },
     ]),
-    CommandModule
+    CommandModule,
   ],
-  providers: [
-    CategoriesSeed, 
-    CategoriesService
-  ],
-  controllers: [
-    CategoriesController
-  ],
-  exports: [
-    CategoriesService
-  ]
+  providers: [CategoriesSeed, CategoriesService],
+  controllers: [CategoriesController],
+  exports: [CategoriesService],
 })
 export class CategoriesModule {}
