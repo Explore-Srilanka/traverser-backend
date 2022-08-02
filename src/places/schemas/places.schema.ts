@@ -1,10 +1,13 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-@Schema({ timestamps: true , versionKey : false})
+@Schema({ timestamps: true, versionKey: false })
 export class Places extends Document {
   @Prop({ unique: true, required: true })
   name: string;
+
+  @Prop()
+  slug: string;
 
   @Prop({ required: true })
   latitude: string;

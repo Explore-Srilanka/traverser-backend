@@ -8,36 +8,39 @@ import { Reviews } from '@/reviews/schemas/reviews.schema';
 
 @Injectable()
 export class ReviewsService {
-    
-    constructor(
-        @InjectModel(Reviews.name)
-        private readonly reviewsModel: Model<Reviews>,
-    ) {}
+  constructor(
+    @InjectModel(Reviews.name)
+    private readonly reviewsModel: Model<Reviews>,
+  ) {}
 
-    public async findAll(paginationDto : PaginationDto) {
-        const { limit, offset, search} = paginationDto;
-        return await this.reviewsModel.find(search).skip(offset).limit(limit).exec();
-      }
-    
-    public async findById(id: string) {
+  public async findAll(paginationDto: PaginationDto) {
+    const { limit, offset, search } = paginationDto;
+    return await this.reviewsModel
+      .find(search)
+      .skip(offset)
+      .limit(limit)
+      .exec();
+  }
+
+  public async findById(id: string) {
     return await this.reviewsModel.findById(id);
-    }
+  }
 
-    public async create(createReviewDto: CreateReviewDto) {
+  public async create(createReviewDto: CreateReviewDto) {
     const review = new this.reviewsModel(createReviewDto);
     return await review.save();
-    }
+  }
 
-    public async update(id: string, updateReviewDto: UpdateReviewDto) {
+  public async update(id: string, updateReviewDto: UpdateReviewDto) {
     const review = await this.reviewsModel.findByIdAndUpdate(
-        { _id: id },
-        updateReviewDto,
+      { _id: id },
+      updateReviewDto,
     );
     return review;
-    }
+  }
 
-    public async delete(id: string) {
+  public async delete(id: string) {
     const review = await this.reviewsModel.findByIdAndRemove(id);
     return review;
-    }
+  }
 }
