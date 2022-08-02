@@ -2,44 +2,36 @@ name: Deploy Production Build
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    types: [ closed ]
-    branches:
-      - master
-  workflow_dispatch:
+    branches: [ master ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [12.x, 14.x, 16.x]
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Set node packagerOptions
-        run: export NODE_OPTIONS=--max_old_space_size=8192
-      - name: Install dependencies
-        run: npm install --production
-      - name: Install global tool
-        run: npm install -g node-prune modclean
-      - name: Remove unnecessary files
-        run: node-prune
-      - name: Cleanup node_modules
-        run: modclean -n default:safe,default:caution -r
-      - name: Deploy to Production Environment
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+  # deploy: ## <-- this is the new stuff
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: akhileshns/heroku-deploy@v3.12.12
+  #       with:
+  #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+  #         heroku_app_name: "github-action-demo-test"
+  #         heroku_email: "pandhuw58@gmail.com"
+  #         remote_branch: master
