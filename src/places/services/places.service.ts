@@ -16,11 +16,52 @@ export class PlacesService {
   public async findAll(paginationDto: PaginationDto) {
     const { limit, offset, search } = paginationDto;
     return await this.placesModel
-      .find(search)
-      .skip(offset)
-      .limit(limit)
+      .find({})
+      //.skip(offset)
+      //.limit(limit)
       .populate('category_id')
+      .populate({
+        path :'reviews',
+        match: {
+          status: 'active'
+        }
+      })
       .exec();
+
+    // return await this.placesModel.aggregate([
+    //   // { 
+    //   //   $match : search 
+    //   // },
+    //   // {
+    //   //   $skip: offset
+    //   // },
+    //   // {
+    //   //   $limit: limit
+    //   // },
+    //   // {
+    //   //   $set: {
+    //   //     category_id: {
+    //   //       $toObjectId: "$category_id"
+    //   //     }, 
+    //   //   }
+    //   // },
+    //   {
+    //     $lookup : {
+    //         from: "categories",
+    //         localField : "category_id",
+    //         foreignField : "_id",
+    //         as : "category"
+    //     }
+    //   },
+    //   {
+    //     $lookup : {
+    //         from: "reviews",
+    //         localField : "_id",
+    //         foreignField : "place_id",
+    //         as : "reviews"
+    //     }
+    //   },
+    // ]).exec();
   }
 
   public async findById(id: string) {
@@ -39,7 +80,7 @@ export class PlacesService {
   public async update(id: string, updatePlaceDto: UpdatePlaceDto) {
     const place = await this.placesModel.findByIdAndUpdate(
       { _id: id },
-      updatePlaceDto,
+      updatePlaceDto
     );
     return place;
   }
