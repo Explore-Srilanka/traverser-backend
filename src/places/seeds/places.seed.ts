@@ -22,7 +22,7 @@ export class PlacesSeed {
         longitude: places[index]['longitude'],
         description: places[index]['description'],
         image: places[index]['image'],
-        category_id: categories[0]._id,
+        category_id: categories[0]._id
       });
     }
     console.log('create:places seeds completed');
