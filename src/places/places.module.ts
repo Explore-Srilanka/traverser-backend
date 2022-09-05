@@ -7,6 +7,7 @@ import { CategoriesModule } from '@/categories/categories.module';
 import { PlacesSeed } from '@/places/seeds/places.seed';
 import { PlacesSchema, Places } from '@/places/schemas/places.schema';
 import { CategoriesSchema, Categories } from '@/categories/schemas/categories.schema';
+import { ReviewsSchema, Reviews } from '@/reviews/schemas/reviews.schema';
 
 @Module({
   imports: [
@@ -14,6 +15,10 @@ import { CategoriesSchema, Categories } from '@/categories/schemas/categories.sc
       {
         name: Categories.name,
         schema: CategoriesSchema
+      },
+      {
+        name: Reviews.name,
+        schema: ReviewsSchema
       },
       {
         name: Places.name,

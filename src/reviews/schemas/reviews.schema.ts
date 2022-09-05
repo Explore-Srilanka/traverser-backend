@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document, Types, ObjectId } from 'mongoose';
 
-@Schema({ timestamps: true, versionKey: false })
+@Schema({ timestamps: true, versionKey: false})
 export class Reviews extends Document {
   @Prop({ required: true })
   name: string;
@@ -19,7 +19,7 @@ export class Reviews extends Document {
   status: string;
 
   @Prop({ type: Types.ObjectId, ref: 'Places' })
-  place_id: string;
+  place_id: ObjectId;
 }
 
 export const ReviewsSchema = SchemaFactory.createForClass(Reviews);
